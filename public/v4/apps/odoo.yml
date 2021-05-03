@@ -5,29 +5,35 @@ networks:
     search:
         driver: bridge
 services:
-    $$cap_appname-db:
-        image: postgres:$$cap_postgres_version
-        volumes:
+    #$$cap_appname-db:
+        #image: postgres:$$cap_postgres_version
+        #volumes:
             - $$cap_appname-db-data:/var/lib/postgresql/data
-        restart: always
-        environment:
-            POSTGRES_USER: odoo
-            POSTGRES_PASSWORD: $$cap_postgres_password
-            POSTGRES_DB: postgres
-        caproverExtra:
-            notExposeAsWebApp: 'true'
+        #restart: always
+        #environment:
+            #POSTGRES_USER: odoo
+            #POSTGRES_PASSWORD: $$cap_postgres_password
+            #POSTGRES_DB: postgres
+        #caproverExtra:
+            #notExposeAsWebApp: 'true'
     $$cap_appname:
-        image: odoo:$$cap_odoo_version
-        depends_on:
-            - $$cap_appname-db
+        image: odoo:latest
+        #depends_on:
+            #- $$cap_appname-db
         volumes:
             - $$cap_appname-odoo-web-data:/var/lib/odoo
             - $$cap_appname-config:/etc/odoo
             - $$cap_appname-addons:/mnt/extra-addons
         restart: always
         environment:
-            POSTGRES_PASSWORD: $$cap_postgres_password
-            HOST: srv-captain--$$cap_appname-db
+            ADMIN_PASSWD: devops123
+            ADMIN_USER: devops1@rg1.us
+            HOST: db-postgresql-nyc3-23847-do-user-4526512-0.b.db.ondigitalocean.com
+            PORT: 25060
+            USER: odoo
+            PASSWORD: mjvuyoeykeai9qpc
+            DB_SSLMODe: require
+            
         caproverExtra:
             containerHttpPort: '8069'
 caproverOneClickApp:
@@ -43,7 +49,7 @@ caproverOneClickApp:
           validRegex: /.{1,}/
         - id: $$cap_odoo_version
           label: Odoo Version
-          defaultValue: '13.0'
+          defaultValue: 'latest'
           description: Check out their docker page for the valid tags https://hub.docker.com/_/odoo?tab=tags
           validRegex: /^([^\s^\/])+$/
     instructions:
