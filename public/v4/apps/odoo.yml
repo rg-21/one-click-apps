@@ -1,9 +1,9 @@
 captainVersion: 4
 networks:
-    db:
-        driver: bridge
-    search:
-        driver: bridge
+    #db:
+        #driver: bridge
+    #search:
+        #driver: bridge
 services:
     #$$cap_appname-db:
         #image: postgres:$$cap_postgres_version
