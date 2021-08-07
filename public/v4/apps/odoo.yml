@@ -28,6 +28,11 @@ services:
         environment:
             #POSTGRES_PASSWORD: $$cap_postgres_password
             #HOST: srv-captain--$$cap_appname-db        
+            
+            BITNAMI_APP_NAME: odoo
+            ODOO_EMAIL: devops1@rg1.us
+            ODOO_PASSWORD: Devops123!!
+            ODOO_LOAD_DEMO_DATA: no
             ODOO_SKIP_BOOTSTRAP: yes
             ODOO_DATABASE_HOST: 35.231.253.154
             ODOO_DATABASE_PORT_NUMBER: 5432
